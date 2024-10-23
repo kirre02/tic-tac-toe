@@ -3,7 +3,6 @@ package org.example.tictactoe;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
-import javafx.scene.layout.VBox;
 
 public class BoardView {
     private final GridPane gridPane;
@@ -18,7 +17,7 @@ public class BoardView {
     private void createBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                Button btn = new Button("-");
+                Button btn = new Button("");
                 btn.setMinSize(100, 100);
                 buttons[i][j] = btn;
                 gridPane.add(btn, j, i);
@@ -42,7 +41,7 @@ public class BoardView {
     public void resetBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                buttons[i][j].setText("-");
+                buttons[i][j].setText("");
             }
         }
     }

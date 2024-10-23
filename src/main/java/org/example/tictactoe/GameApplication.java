@@ -15,10 +15,8 @@ public class GameApplication extends Application {
         GameController controller = new GameController(model, view);
 
         VBox vbox = new VBox();
-        Button resetButton = new Button("Reset Game");
-        resetButton.setOnAction(e -> controller.resetGame());
 
-        vbox.getChildren().addAll(view.getBoard(), resetButton);
+        vbox.getChildren().addAll(view.getBoard());
 
         Scene scene = new Scene(vbox, 400, 450);
         primaryStage.setScene(scene);

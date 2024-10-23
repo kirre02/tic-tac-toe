@@ -33,7 +33,6 @@ public class Board {
             grid[row][col] = currentPlayer;
             if (checkWinner()) {
                 gameOver = true;
-                reset();
             } else {
                 currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
             }

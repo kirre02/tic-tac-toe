@@ -1,16 +1,14 @@
 package org.example.tictactoe;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import org.example.tictactoe.Board;
-
 public class GameController {
-    private Board model;
-    private BoardView view;
+    private final Board board;
+    private final BoardView view;
+    private final Computer comp;
 
     public GameController(Board model, BoardView view) {
-        this.model = model;
+        this.board = model;
         this.view = view;
+        this.comp = new Computer(board);
         initializeController();
     }
 
@@ -19,23 +17,33 @@ public class GameController {
             for (int j = 0; j < 3; j++) {
                 final int row = i;
                 final int col = j;
-                view.getButton(row, col).setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        if (model.makeMove(row, col)) {
-                            view.updateCell(row, col, model.getCell(row, col));
-                            if (model.isGameOver()) {
-                                System.out.println("Player " + model.getCurrentPlayer() + " wins!");
-                            }
+                view.getButton(row, col).setOnAction(event -> {
+                    if (board.makeMove(row, col)) {
+                        view.updateCell(row, col, board.getCell(row, col));
+                        if (!board.isGameOver()) {
+                            updateView();
+                            comp.makeMove();
+                        } else {
+                            System.out.println("Player " + board.getCurrentPlayer() + " wins!");
+                            resetGame();
                         }
                     }
                 });
             }
         }
     }
+    
+    private void updateView() {
+        // Refresh the view with the current state of the board
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                view.updateCell(i, j, board.getCell(i, j));
+            }
+        }
+    }
 
     public void resetGame() {
-        model.reset();
+        board.reset();
         view.resetBoard();
     }
 }
