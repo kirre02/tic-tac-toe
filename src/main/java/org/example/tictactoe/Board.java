@@ -1,13 +1,13 @@
 package org.example.tictactoe;
 
 public class Board {
-    private final char[][] grid; // 3x3 grid
-    private char currentPlayer; // 'X' or 'O'
+    private final char[][] grid;
+    private char currentPlayer;
     private boolean gameOver;
 
     public Board() {
         grid = new char[3][3];
-        currentPlayer = 'X'; // X starts
+        currentPlayer = 'X';
         gameOver = false;
         initializeBoard();
     }
@@ -15,7 +15,7 @@ public class Board {
     private void initializeBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                grid[i][j] = '-'; // Empty spot
+                grid[i][j] = '-';
             }
         }
     }
@@ -29,9 +29,13 @@ public class Board {
     }
 
     public boolean makeMove(int row, int col) {
+        System.out.println(currentPlayer);
         if (grid[row][col] == '-' && !gameOver) {
             grid[row][col] = currentPlayer;
             if (checkWinner()) {
+                System.out.println(currentPlayer + " has won");
+                gameOver = true;
+            } else if (isFull()) {
                 gameOver = true;
             } else {
                 currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
@@ -41,8 +45,19 @@ public class Board {
         return false;
     }
 
+    private boolean isFull() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (grid[i][j] == '-') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean checkWinner() {
-        // Check rows, columns, and diagonals
+        System.out.println(currentPlayer);
         for (int i = 0; i < 3; i++) {
             if (grid[i][0] == currentPlayer && grid[i][1] == currentPlayer && grid[i][2] == currentPlayer)
                 return true;

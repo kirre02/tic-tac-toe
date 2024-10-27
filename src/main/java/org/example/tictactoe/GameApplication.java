@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 
 public class GameApplication extends Application {
 

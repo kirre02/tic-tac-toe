@@ -11,18 +11,23 @@ public class GameController {
         this.computer = new Computer(board);
         initializeController();
     }
-
+    
     private void initializeController() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 final int row = i;
                 final int col = j;
-                view.getButton(row, col).setOnMouseClicked(event -> {
+                view.getButton(row, col).setOnAction(event -> {
                     if (board.makeMove(row, col)) {
                         view.updateCell(row, col, board.getCell(row, col));
                         if (!board.isGameOver()) {
                             computer.makeMove();
                             updateView();
+
+                            if (board.isGameOver()) {
+                                System.out.println("Player " + board.getCurrentPlayer() + " wins!");
+                                resetGame();
+                            }
                         } else {
                             System.out.println("Player " + board.getCurrentPlayer() + " wins!");
                             resetGame();
@@ -32,6 +37,7 @@ public class GameController {
             }
         }
     }
+
 
     private void updateView() {
         // Refresh the view with the current state of the board
