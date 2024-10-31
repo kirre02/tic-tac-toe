@@ -29,7 +29,6 @@ public class Board {
     }
 
     public boolean makeMove(int row, int col) {
-        System.out.println(currentPlayer);
         if (grid[row][col] == '-' && !gameOver) {
             grid[row][col] = currentPlayer;
             if (checkWinner()) {
@@ -57,7 +56,6 @@ public class Board {
     }
 
     public boolean checkWinner() {
-        System.out.println(currentPlayer);
         for (int i = 0; i < 3; i++) {
             if (grid[i][0] == currentPlayer && grid[i][1] == currentPlayer && grid[i][2] == currentPlayer)
                 return true;
