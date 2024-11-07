@@ -1,17 +1,28 @@
 package org.example.tictactoe;
 
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 
 public class BoardView {
     private final GridPane gridPane;
     private final Button[][] buttons;
+    private final Label scoreLabelX;
+    private final Label scoreLabelO;
+    private final VBox mainLayout;
 
     public BoardView() {
         gridPane = new GridPane();
         buttons = new Button[3][3];
+        scoreLabelX = new Label("Player X: 0");
+        scoreLabelO = new Label("Player O: 0");
+
         createBoard();
+
+        mainLayout = new VBox(10, scoreLabelX, scoreLabelO, gridPane);
+        mainLayout.setAlignment(Pos.CENTER);
     }
 
     private void createBoard() {
@@ -26,8 +37,8 @@ public class BoardView {
         gridPane.setAlignment(Pos.CENTER);
     }
 
-    public GridPane getBoard() {
-        return gridPane;
+    public VBox getMainLayout() {
+        return mainLayout;
     }
 
     public Button getButton(int row, int col) {
@@ -44,5 +55,10 @@ public class BoardView {
                 buttons[i][j].setText("");
             }
         }
+    }
+
+    public void updateScoreDisplay(int scoreX, int scoreO) {
+        scoreLabelX.setText("Player X: " + scoreX);
+        scoreLabelO.setText("Player O: " + scoreO);
     }
 }

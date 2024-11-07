@@ -4,11 +4,15 @@ public class Board {
     private final char[][] grid;
     private char currentPlayer;
     private boolean gameOver;
+    private int scoreX;
+    private int scoreO;
 
     public Board() {
         grid = new char[3][3];
         currentPlayer = 'X';
         gameOver = false;
+        scoreO = 0;
+        scoreX = 0;
         initializeBoard();
     }
 
@@ -22,6 +26,22 @@ public class Board {
 
     public char getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public void updateScore() {
+        if (currentPlayer == 'X') {
+            scoreX++;
+        } else {
+            scoreO++;
+        }
+    }
+
+    public int getScoreX() {
+        return scoreX;
+    }
+
+    public int getScoreO() {
+        return scoreO;
     }
 
     public boolean isGameOver() {

@@ -3,23 +3,17 @@ package org.example.tictactoe;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
 
 public class GameApplication extends Application {
-
     @Override
     public void start(Stage primaryStage) {
         Board model = new Board();
         BoardView view = new BoardView();
         GameController controller = new GameController(model, view);
 
-        VBox vbox = new VBox();
-
-        vbox.getChildren().addAll(view.getBoard());
-
-        Scene scene = new Scene(vbox, 400, 450);
-        primaryStage.setScene(scene);
+        Scene scene = new Scene(view.getMainLayout(), 400, 500);
         primaryStage.setTitle("Tic Tac Toe");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
